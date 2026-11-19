@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Please the Monkey</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="assets/monkey5.svg" />
+</head>
+
+<body>
+    <header id="hud">
+        <button id="audio-btn">🔊</button>
+        <dl class="score-container">
+            <!-- HIGH SCORE -->
+            <dt class="hi-label">
+                <abbr title="High Score">HI</abbr>
+            </dt>
+            <dd id="hi-score" class="score-digits">
+                <output id="hi-score-output">00000</output>
+            </dd>
+
+            <!-- CURRENT SCORE -->
+            <dt class="sr-only">Current Score</dt>
+            <dd id="score" class="score-digits">
+                <output id="score-output">00000</output>
+            </dd>
+        </dl>
+    </header>
+
+    <main id="game-container">
+        <!-- 1. START SCREEN -->
+        <section id="start-screen" class="screen active">
+            <img id="monkey-intro" src="assets/monkey5.svg" alt="" />
+            <h1>Please the Monkey</h1>
+            <p>Feed it, pet it, and clean its poop.</p>
+            <p>Just don't let it lose its patience!</p>
+            <button id="start-btn">Start!</button>
+        </section>
+
+        <!-- 2. GAME SCREEN -->
+        <section id="game-screen" class="screen hidden">
+            <figure id="monkey-container">
+                <!-- Monkey SVG -->
+                <div id="monkey-animation" class="bored-monkey">
+                    <img id="monkey" src="assets/monkey3.svg" alt="Monkey" role="button" />
+                </div>
+
+                <!-- Patience bar -->
+                <figcaption class="patience-wrapper">
+                    <label for="patience-bar" class="sr-only">Patience level</label>
+
+                    <div id="patience-bar" class="meter">
+                        <span id="patience-gauge" style="--patience: 50%"></span>
+                    </div>
+                </figcaption>
+            </figure>
+        </section>
+
+        <!-- 3. GAME-OVER SCREEN -->
+        <section id="game-over-screen" class="screen hidden">
+            <h2>Game Over!</h2>
+            <img src="assets/monkey1.svg" alt="Impatient monkey" class="pissed-monkey" />
+            <button id="restart-btn">Try Again!</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

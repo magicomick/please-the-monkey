@@ -1,0 +1,457 @@
+/* FONTS */
+@font-face {
+  font-family: "Noto Sans Symbols 2";
+  src: url("assets/fonts/NotoSansSymbols2-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Irish Grover";
+  src: url("assets/fonts/IrishGrover-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* General rules for all the screens */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  color: #000; /*FIXME: check if I really need this line*/
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#start-screen,
+#game-over-screen {
+  align-items: center;
+  justify-content: center;
+}
+
+#start-screen h1 {
+  font-family: "Irish Grover", cursive;
+  font-size: 3.5rem;
+  text-align: center;
+  color: #094;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  animation: boredMonkey 5s ease-in-out infinite alternate;
+}
+
+#monkey-intro {
+  width: 10vw;
+  min-width: 150px;
+  max-width: 250px;
+  height: auto;
+  -webkit-user-drag: none;
+  animation: boredMonkey 2s ease-in-out infinite alternate;
+  z-index: 10;
+  cursor: pointer;
+}
+
+@keyframes spin360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#monkey-intro:hover {
+  animation: spin360 2s ease-in-out forwards infinite;
+}
+
+#game-over-screen h2 {
+  font-family: "Irish Grover", cursive;
+  font-size: 3.5rem;
+  text-align: center;
+  color: #e33;
+  user-select: none;
+  margin-bottom: 1rem;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  animation: angryMonkey 1s linear infinite alternate;
+}
+
+.pissed-monkey {
+  width: 35vw;
+  min-width: 170px;
+  max-width: 250px;
+  height: auto;
+  position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  animation: angryMonkey 0.1s ease-in-out infinite alternate;
+  z-index: 10;
+}
+
+.pissed-monkey:hover {
+  animation: angryMonkey 0.05s ease-in-out infinite alternate;
+}
+
+main button {
+  background: #fb0;
+  /* font-family: inherit; */
+  padding: 0.6rem 1.3rem;
+  font-weight: 900;
+  font-size: 1.1rem;
+  border: 3px solid #000;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 0.1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+main button:hover {
+  background: #fb1;
+  transform: translate(0, -0.05rem);
+  box-shadow: 0 0.15rem;
+}
+
+main button:active {
+  background: #fa0;
+  transform: translate(0, 0.05rem);
+  box-shadow: 0 0.05rem;
+}
+
+/* Score Counter */
+#hud {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  width: calc(100% - 1rem);
+  margin: 0.2rem;
+  align-self: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+#audio-btn {
+  pointer-events: auto;
+  background: transparent;
+  font-family: "Noto Sans Symbols 2", sans-serif;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.score-container,
+.score-container dd {
+  margin: 0;
+  padding: 0;
+}
+
+.score-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #888;
+}
+
+p {
+  font-size: 1.5=2rem;
+  color: #666;
+  text-align: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+#score {
+  color: #000;
+  margin-left: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.hi-label abbr {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+#game-container {
+  flex: 1;
+  width: 100vw;
+  position: relative;
+}
+
+/* Utility class to hide any screen */
+.hidden {
+  display: none !important;
+}
+
+/* Monkey */
+#monkey-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+#monkey {
+  width: 35vw;
+  min-width: 170px;
+  max-width: 250px;
+  height: auto;
+  cursor: pointer;
+  position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+#monkey:hover {
+  transform: scale(1.05);
+}
+
+#monkey:active {
+  transform: scale(1.02);
+}
+
+/* Monkey animations */
+.pleased-monkey {
+  animation: pleasedMonkey 1s ease-in-out infinite alternate;
+}
+
+@keyframes pleasedMonkey {
+  0% {
+    transform: translateY(1em) rotate(10deg);
+  }
+  33% {
+    transform: rotate(-10deg);
+  }
+  66% {
+    transform: translateY(-1em) rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+.happy-monkey {
+  animation: happyMonkey 2s ease-in-out infinite alternate;
+}
+
+@keyframes happyMonkey {
+  0% {
+    transform: translateY(0) rotate(10deg);
+  }
+  33% {
+    transform: rotate(-10deg);
+  }
+  66% {
+    transform: translateY(-0.6em) rotate(10deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.bored-monkey {
+  animation: boredMonkey 2s ease-in-out infinite alternate;
+}
+
+@keyframes boredMonkey {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: translateY(-0.6em) rotate(1deg);
+  }
+}
+
+.sad-monkey {
+  animation: sadMonkey 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes sadMonkey {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: translateY(-0.6em) rotate(-2deg);
+  }
+}
+
+.angry-monkey {
+  animation: angryMonkey 0.1s linear infinite alternate;
+}
+
+@keyframes angryMonkey {
+  0% {
+    transform: translateX(0.3em) rotate(1deg);
+  }
+  100% {
+    transform: translateX(-0.3em) rotate(-1deg);
+  }
+}
+
+/* Floating itens (Banana, Poop, Rotten Banana) base class: */
+.floating-item {
+  position: absolute;
+  width: 12vw;
+  min-width: 50px;
+  max-width: 80px;
+  height: 12vw;
+  min-height: 50px;
+  max-height: 80px;
+  z-index: 10;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.floating-item:hover {
+  scale: 1.1;
+  z-index: 11;
+}
+
+.good:hover {
+  filter: drop-shadow(0 0 10px #2c5);
+}
+
+.bad:hover {
+  filter: drop-shadow(0 0 10px #e33);
+}
+
+/* Patience Meter (Progress Bar) */
+.meter {
+  box-sizing: content-box;
+  width: 18vw;
+  min-width: 90px;
+  max-width: 128px;
+  height: 2.5vw;
+  max-height: 16px;
+  position: relative;
+  background: #333;
+  border-radius: 8px;
+  border: 3px solid #000;
+  padding: 0;
+  box-shadow: inset 0 1px 1px #00000044;
+  margin: 8px;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  width: var(--patience, 100%);
+  transition:
+    width 0.3s ease-out,
+    background-color 0.3s ease;
+  background-color: color-mix(
+    in srgb,
+    #2c5 calc((var(--patience) - 50%) * 2),
+    color-mix(in srgb, #fa1 calc(var(--patience) * 2), #e33)
+  );
+  box-shadow:
+    inset 0 2px 8px #ffffff4d,
+    inset 0 -2px 6px #00000066;
+  position: relative;
+  overflow: hidden;
+}
+
+.meter > span:after,
+.animate > span > span {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    #ffffff33 25%,
+    transparent 25%,
+    transparent 50%,
+    #ffffff33 50%,
+    #ffffff33 75%,
+    transparent 75%,
+    transparent
+  );
+  z-index: 1;
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.animate > span:after {
+  display: none;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+/* Avoiding "blue" selection */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/*
+Source of the Progress Bar snippet used above: 
+https://css-tricks.com/css3-progress-bars/
+*/

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="assets/readme/logo.svg" alt="Please the Monkey" width="700px">
+  <a href="https://magicomick.github.io/please-the-monkey/"><img src="assets/readme/logo.svg" alt="Please the Monkey" width="700px"></a>
 </h1>
 
 <div align="center">
@@ -12,14 +12,14 @@
 <p><em>A fast-paced reflex-based arcade clicker browser game built with vanilla JavaScript.</em></p>
 
 <p>
-  <a href="https://http.cat/images/503.jpg"><strong>🎮 Play Live Demo</strong></a> ·
+  <a href="https://magicomick.github.io/please-the-monkey/"><strong>🎮 Play Live Demo</strong></a> ·
   <a href="#about">About</a> ·
   <a href="#how-to-play">How to Play</a> ·
   <a href="#built-with">Tools</a> ·
   <a href="#credits">Credits</a>
 </p>
 
-<a href="https://http.cat/images/503.jpg">
+<a href="https://magicomick.github.io/please-the-monkey/">
   <img src="assets/readme/preview.gif" alt="Please the Monkey Gameplay Preview (click to play)" width="600px" />
 </a>
 
